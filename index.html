@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reyz4You Dashboard</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; background:#121212; color:#f2f2f2; }
+
+/* Loading Screen */
+#loading {
+    position: fixed; top:0; left:0;
+    width:100%; height:100%;
+    background:#1c1c1c; display:flex;
+    flex-direction:column; justify-content:center; align-items:center;
+    z-index:999; text-align:center; opacity:1; transition: opacity 1s ease;
+}
+#loading h1 { font-size:32px; color:#3498db; margin-bottom:20px; }
+.loading-bar { width:250px; height:10px; background:#333; border-radius:10px; overflow:hidden; }
+.loading-progress { width:0%; height:100%; background:#3498db; transition: width 5s linear; }
+
+/* Top Bar */
+.top-bar { display:flex; align-items:center; padding:10px 20px; background:#1e1e1e; border-bottom:1px solid #3498db; position:sticky; top:0; z-index:10; }
+.top-bar a { text-decoration:none; color:#f2f2f2; font-weight:bold; }
+
+.banner-link img { width:100%; border-radius:10px; border:2px solid #3498db; margin-bottom:15px; }
+
+.container { max-width:500px; margin:20px auto; padding:20px; background:#1e1e1e; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.5); display:none; opacity:0; }
+h2 { text-align:center; color:#3498db; margin-bottom:15px; }
+
+.payment-card { background:#2c2c2c; border-radius:10px; padding:15px; margin:10px 0; border-left:5px solid #3498db; display:flex; flex-direction:column; }
+.payment-card .left { font-weight:bold; margin-bottom:10px; }
+.button-group { display:flex; gap:10px; flex-wrap:wrap; }
+button { padding:8px 12px; background:#3498db; color:white; border:none; border-radius:8px; cursor:pointer; }
+button:hover { background:#217ac0; }
+.number-display { margin-top:10px; font-weight:bold; color:#ffdd55; word-break: break-all; }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading">
+    <h1>Welcome!</h1>
+    <div class="loading-bar">
+        <div class="loading-progress" id="progress"></div>
+    </div>
+    <p style="margin-top:15px;">Loading...</p>
+</div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <a href="https://link-profile.com" target="_blank">Reyz4You Host</a>
+</div>
+
+<!-- Payment Container -->
+<div class="container" id="mainContent">
+  <!-- Banner Foto Link -->
+  <a href="https://link-profile.com" target="_blank" class="banner-link">
+    <img src="https://files.catbox.moe/on3cvt.jpg" alt="Banner Payment">
+  </a>
+
+  <h2>Metode Pembayaran</h2>
+  
+  <div class="payment-card">
+    <div class="left">Dana</div>
+    <div class="button-group">
+      <button onclick="showNumber('082181101556','danaNumber')">Tampilkan Nomor</button>
+      <button onclick="copyNumber('082181101556')">Salin Nomor</button>
+    </div>
+    <div class="number-display" id="danaNumber"></div>
+  </div>
+  
+  <div class="payment-card">
+    <div class="left">Gopay</div>
+    <div class="button-group">
+      <button onclick="showNumber('087796862524','gopayNumber')">Tampilkan Nomor</button>
+      <button onclick="copyNumber('87796862524')">Salin Nomor</button>
+    </div>
+    <div class="number-display" id="gopayNumber"></div>
+  </div>
+  
+  <div class="payment-card">
+    <div class="left">OVO</div>
+    <div class="button-group">
+      <button onclick="showNumber('087759094416','ovoNumber')">Tampilkan Nomor</button>
+      <button onclick="copyNumber('087759094416')">Salin Nomor</button>
+    </div>
+    <div class="number-display" id="ovoNumber"></div>
+  </div>
+  
+  <div class="payment-card">
+    <div class="left">SeaBank</div>
+    <div class="button-group">
+      <button onclick="showNumber('901430530028','seabankNumber')">Tampilkan Nomor</button>
+      <button onclick="copyNumber('901430530028')">Salin Nomor</button>
+    </div>
+    <div class="number-display" id="seabankNumber"></div>
+  </div>
+
+  <h2 style="margin-top:20px;">Shop Menu</h2>
+  <div class="payment-card"><div class="left">Daftar Panel</div><button onclick="window.location.href='panel.html'">Buka</button></div>
+  <div class="payment-card"><div class="left">Daftar VPS</div><button onclick="window.location.href='vps.html'">Buka</button></div>
+  <div class="payment-card"><div class="left">Jasa/Fix</div><button onclick="window.location.href='jasa.html'">Buka</button></div>
+  <div class="payment-card"><div class="left">Nokos</div><button onclick="window.location.href='nokos.html'">Buka</button></div>
+</div>
+
+<script>
+// Loading smooth
+window.onload=function(){
+    const progress=document.getElementById("progress");
+    const loading=document.getElementById("loading");
+    const main=document.getElementById("mainContent");
+    progress.style.width="100%";
+    setTimeout(()=>{
+        loading.style.opacity=0;
+        setTimeout(()=>{
+            loading.style.display="none";
+            main.style.display="block";
+            setTimeout(()=>{main.style.opacity=1;},50);
+        },1000);
+    },5000); // 5 detik
+}
+
+// Tampilkan nomor
+function showNumber(number, elementId){
+    document.getElementById(elementId).innerText = number;
+}
+
+// Salin nomor
+function copyNumber(number){
+    navigator.clipboard.writeText(number).then(()=>alert("Nomor berhasil disalin: "+number));
+}
+</script>
+
+</body>
+</html>
